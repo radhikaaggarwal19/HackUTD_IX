@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DynamiGo</title>
     <style>
         #map {
             height: 100%;
@@ -22,11 +22,32 @@
 </head>
 
 <body>
+    <div id="menu">
+        <label>What are you looking for today?</label>
+        <select id="typeOption">
+            <option value="restaurants">Restaurants</option>
+            <option value="gas_station">Gas Stations</option>
+            <option value="hospital">Hospital</option>
+            <option value="cafe">Cafe</option>
+            <option value="convenience_store">Convenience Store</option>
+        </select>
+
+        <br />
+
+        <label>What is your current speed?</label>
+        <select id="radiusOption">
+            <option value="slow">Upto 20 mi/h</option>
+            <option value="medium">Upto 40 mi/h</option>
+            <option value="high">Over 40 mi/h</option>
+        </select>
+
+        <br />
+        <button type="button" onclick="myFunction()">Try It</button>
+    </div>
     <div id="map"></div>
     <script src="hungry.js" type="text/javascript"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkKtQ-YfITEBsed8nmpQZOtLSBv7tCKX0&callback=initMap&libraries=places"></script>
-    ></script>
 </body>
 
 </html>

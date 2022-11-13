@@ -1,6 +1,24 @@
 let map = null;
 
+let mapOption = null;
+let radiusOption = null;
+
+function myFunction() {
+    mapOption = document.getElementById("typeOption").value;
+    radiusOption = document.getElementById("radiusOption").value;
+    switch (document.getElementById("radiusOption").value) {
+        case "slow": radiusOption = '1609'; break;
+        case "medium": radiusOption = '3218'; break;
+        case "high": radiusOption = '4827'; break;
+    }
+
+    console.log(mapOption, radiusOption);
+    initMap();
+}
+
+
 function initMap() {
+
     let location = new Object();
     navigator.geolocation.getCurrentPosition(function (position) {
 
@@ -9,34 +27,23 @@ function initMap() {
             lng: position.coords.longitude
         };
 
-        //infoWindow.setPosition(pos);
-        // infoWindow.setContent("You're here!");
-        //  infoWindow.open(map);
-        //map.setCenter(pos);
-
-        // self.setState({
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // })
-
-        //location.lat = 32.9841206
-        //console.log(typeof (location.lat));
-        //location.lng = parseFloat(pos.coords.longitude.value);
-        //console.log(typeof (location.lng));
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: pos.lat, lng: pos.lng },
             zoom: 15
         });
-        getRestaurants(pos);
+        getRestaurants(pos, mapOption, radiusOption);
     });
 }
 
-function getRestaurants(location) {
+function getRestaurants(location, mapOption, radiusOption) {
+
     var pyrmont = new google.maps.LatLng(location.lat, location.lng);
     var request = {
         location: pyrmont,
-        radius: '3000',
-        type: ['restaurant']
+        radius: radiusOption,
+        type: [mapOption],
+        openNow: true,
+        rankby: 'distance'
     };
     service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, callback);
